@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>GeoGebra Moderno</title>
+  <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f0f4ff, #e6ecff);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      width: 100%;
+      padding: 20px;
+      background-color: #3f51b5;
+      color: white;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      animation: slideDown 1s ease-out;
+    }
+
+    #geogebra-applet {
+      width: 95%;
+      max-width: 1200px;
+      height: 700px;
+      margin: 30px auto;
+      border-radius: 15px;
+      overflow: hidden;
+      animation: fadeIn 1.5s ease-in;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      #geogebra-applet {
+        height: 500px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>GeoGebra Clásico Personalizado</header>
+
+  <div id="geogebra-applet"></div>
+
+  <script>
+    var params = {
+      appName: "classic",
+      width: 1200,
+      height: 700,
+      showToolBar: true,
+      showAlgebraInput: true,
+      showMenuBar: true,
+      enableShiftDragZoom: true,
+      enableRightClick: true,
+      useBrowserForJS: false,
+      language: "es"
+    };
+
+    var applet = new GGBApplet(params, true);
+
+    window.addEventListener("load", function () {
+      applet.inject("geogebra-applet");
+
+      setTimeout(() => {
+        applet.evalCommand("f(x) = 2x + 1");
+        applet.evalCommand("g(x) = x^2 - 4");
+        applet.evalCommand("A = (3, 2)");
+        applet.evalCommand("a = Slider(1, 10, 0.1)");
+        applet.evalCommand("h(x) = a * x");
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
